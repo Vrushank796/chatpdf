@@ -16,7 +16,11 @@ export default async function Home() {
             <UserButton afterSignOutUrl="/" />
           </div>
           <div className="flex mt-2">
-            {isAuth && <Button>Go to Chats</Button>}
+            {isAuth && (
+              <Link href="/chat/1">
+                <Button>Go to Chats</Button>
+              </Link>
+            )}
           </div>
           <p>
             Join million of students, researchers and professionals to instantly
