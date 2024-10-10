@@ -1,21 +1,39 @@
 "use client";
 
 import { Input } from "./ui/input";
-import React from "react";
+import React, { useEffect } from "react";
 import { useChat } from "ai/react";
 import { Send } from "lucide-react";
 import { Button } from "./ui/button";
 import MessageList from "./MessageList";
+import { channel } from "diagnostics_channel";
 
-type Props = {};
+type Props = { chatId: number };
 
-const ChatComponent = (props: Props) => {
+const ChatComponent = ({ chatId }: Props) => {
   const { input, handleInputChange, handleSubmit, messages } = useChat({
     api: "/api/chat",
+    body: {
+      chatId,
+    },
   });
 
+  useEffect(() => {
+    const messageContainer = document.getElementById("message-container");
+
+    if (messageContainer) {
+      messageContainer.scrollTo({
+        top: messageContainer.scrollHeight,
+        behavior: "smooth",
+      });
+    }
+  }, [messages]);
+
   return (
-    <div className="relative max-h-screen overflow-scroll">
+    <div
+      className="relative max-h-screen overflow-scroll"
+      id="message-container"
+    >
       {/* header */}
       <div className="sticky top-0 inset-x-0 p-2 bg-white h-fit">
         <h3 className="text-xl font-bold">Chats</h3>
@@ -26,7 +44,7 @@ const ChatComponent = (props: Props) => {
 
       <form
         onSubmit={handleSubmit}
-        className="sticky bottom-0 inset-x-0 px-2 py-4 bg-white"
+        className="sticky bottom-0 inset-x-0 px-2 py-4 my-2 bg-white"
       >
         <div className="flex">
           <Input
