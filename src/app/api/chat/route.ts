@@ -2,7 +2,7 @@ import { openai } from "@ai-sdk/openai";
 import { convertToCoreMessages, Message, streamText } from "ai";
 import { NextResponse } from "next/server";
 import { eq } from "drizzle-orm";
-import { chats } from "@/lib/db/schema";
+import { chats, messages as _messages } from "@/lib/db/schema";
 import { db } from "@/lib/db";
 import { getContext } from "@/lib/context";
 
@@ -39,12 +39,28 @@ export async function POST(req: Request) {
         `,
     };
 
+    // save user message into db
+    await db.insert(_messages).values({
+      chatId,
+      content: lastMessage.content,
+      role: "user",
+    });
+
     const result = await streamText({
       model: openai("gpt-3.5-turbo"),
       messages: convertToCoreMessages([
         prompt,
         ...messages.filter((message: Message) => message.role === "user"),
       ]),
+
+      onFinish: async (completion) => {
+        // save ai message into db
+        await db.insert(_messages).values({
+          chatId,
+          content: completion.text,
+          role: "system",
+        });
+      },
     });
 
     return result.toDataStreamResponse();
