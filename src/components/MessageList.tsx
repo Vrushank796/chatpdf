@@ -1,12 +1,22 @@
 import { Message } from "ai/react";
 import React from "react";
 import { cn } from "@/lib/utils";
+import { LoaderCircle } from "lucide-react";
 
 type Props = {
+  isLoading: boolean;
   messages: Message[];
 };
 
-const MessageList = ({ messages }: Props) => {
+const MessageList = ({ messages, isLoading }: Props) => {
+  if (isLoading) {
+    return (
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 ">
+        <LoaderCircle className="w-6 h-6 animate-spin bg-blue-600" />
+      </div>
+    );
+  }
+
   if (!messages) {
     return <></>;
   }
