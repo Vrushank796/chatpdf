@@ -29,4 +29,18 @@ export const messages = pgTable("messages", {
   role: userSystemEnum("role").notNull(),
 });
 
-// npx drizzle-kit push:pg
+export const userSubscriptions = pgTable("user_subscriptions", {
+  id: serial("id").primaryKey(),
+  userId: varchar("user_id", { length: 256 }).notNull().unique(),
+  stripeCustomerId: varchar("stripe_customer_id", { length: 256 })
+    .notNull()
+    .unique(),
+  stripeSubscriptionId: varchar("stripe_subscription_id", {
+    length: 256,
+  }).unique(),
+  stripePriceId: varchar("stripe_price_id", { length: 256 }),
+  stripeCurrentPeriodEnd: timestamp("stripe_current_period_end"),
+});
+
+// npx drizzle-kit push -- NEW VERSION
+// npx drizzle-kit push:pg -- OLD VERSION
