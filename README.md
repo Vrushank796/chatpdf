@@ -90,5 +90,5 @@ The app is powered by the following technologies:
 - Implement user dashboard for managing stored documents.
 - Add multilingual support for document retrieval.
 
-##Resources:
+## Resources:
 https://youtu.be/r895rFUbGtE?si=AEBX2NFE4CxG6avF
