@@ -1,4 +1,4 @@
-# ChatPDF Clone App
+# ChatPDF Clone
 
 ## Introduction
 
