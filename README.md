@@ -60,6 +60,24 @@ The app is powered by the following technologies:
    - **Stripe**: Add Stripe keys for payment processing.
    - **PineconeDB**: API keys and configuration for vector database.
    - **OpenAI**: API key for OpenAI integration.
+  
+   Required ENV variables:
+   - NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY
+   - CLERK_SECRET_KEY
+   - NEXT_PUBLIC_CLERK_SIGN_IN_URL
+   - NEXT_PUBLIC_CLERK_SIGN_UP_URL
+   - NEXT_PUBLIC_CLERK_AFTER_SIGN_IN_URL
+   - NEXT_PUBLIC_CLERK_AFTER_SIGN_UP_URL
+   - DATABASE_URL
+   - NEXT_PUBLIC_S3_ACCESS_KEY_ID
+   - NEXT_PUBLIC_S3_SECRET_ACCESS_KEY
+   - NEXT_PUBLIC_S3_BUCKET_NAME
+   - PINECONE_API_KEY
+   - OPENAI_API_KEY
+   - STRIPE_API_KEY
+   - STRIPE_WEBHOOK_SIGNING_SECRET
+   - NEXT_BASE_URL
+
 
 4. **Run the app**:
    ```bash
